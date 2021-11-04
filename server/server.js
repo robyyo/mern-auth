@@ -25,11 +25,11 @@ const authRoutes = require("./routes/auth");
 
 //app middleware
 app.use(morgan("dev"));
-app.use(bodyParser.json());
+// Express.json will work in place of bodyParser
+// app.use(bodyParser.json());
 
-// Test if express.json will work in place of bodyParser
 // app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.json());
 
 // app.use(cors()); // enable same-origin resource sharing
 

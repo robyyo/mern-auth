@@ -58,7 +58,7 @@ exports.signup = (req, res) => {
         });
       })
       .catch((err) => {
-        console.log("SIGNUP EMAIL SENT ERROR", err);
+        // console.log("SIGNUP EMAIL SENT ERROR", err);
         return res.json({
           message: err.message,
         });

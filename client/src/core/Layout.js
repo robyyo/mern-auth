@@ -9,6 +9,11 @@ const Layout = ({ children }) => {
           Home
         </Link>
       </li>
+      <li>
+        <Link to="/signup" className="text-light nav-link">
+          Signup
+        </Link>
+      </li>
     </ul>
   );
 

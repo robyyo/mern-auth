@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
-const user = require("../models/user");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // ****EXAMPLE - Simple User Signup****
@@ -100,4 +99,31 @@ exports.accountActivation = (req, res) => {
       message: "Something went wrong. Try again.",
     });
   }
+};
+
+exports.signin = (req, res) => {
+  const { email, password } = req.body;
+  //check if user exists
+  User.findOne({ email }).exec((err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: "User with bad email. Does not exist. Please signup.",
+      });
+    }
+    //Match password with what is saved in DB
+    if (!user.authenticate(password)) {
+      return res.status(400).json({
+        error: "Email and password do not match.",
+      });
+    }
+    //generate token and send to client
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+    const { _id, name, email, role } = user;
+    return res.json({
+      token,
+      user: { _id, name, email, role },
+    });
+  });
 };

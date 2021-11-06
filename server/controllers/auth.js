@@ -54,7 +54,7 @@ exports.signup = (req, res) => {
       .then((sent) => {
         // console.log("SIGNUP EMAIL SENT:", sent);
         return res.json({
-          messsage: `Email has been sent to ${email}. Follow the instructions to setup your account.`,
+          message: `Email has been sent to ${email}. Follow the instructions to setup your account.`,
         });
       })
       .catch((err) => {

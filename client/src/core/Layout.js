@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const Layout = ({ children }) => {
   const nav = () => (
@@ -30,4 +30,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default withRouter(Layout);

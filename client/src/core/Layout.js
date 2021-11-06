@@ -1,21 +1,44 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, match }) => {
+  const isActive = (path) => {
+    if (match.path === path) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const nav = () => (
     <ul className="nav nav-tabs bg-primary">
       <li className="nav-item">
-        <Link to="/" className="text-light nav-link">
+        <Link
+          to="/"
+          className={
+            isActive("/") ? `text-dark nav-link` : `text-light nav-link`
+          }
+        >
           Home
         </Link>
       </li>
       <li>
-        <Link to="/signup" className="text-light nav-link">
+        <Link
+          to="/signup"
+          className={
+            isActive("/signup") ? `text-dark nav-link` : `text-light nav-link`
+          }
+        >
           Signup
         </Link>
       </li>
       <li>
-        <Link to="/signin" className="text-light nav-link">
+        <Link
+          to="/signin"
+          className={
+            isActive("/signin") ? `text-dark nav-link` : `text-light nav-link`
+          }
+        >
           Signin
         </Link>
       </li>
@@ -30,4 +53,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default withRouter(Layout);

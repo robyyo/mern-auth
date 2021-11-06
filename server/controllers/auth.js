@@ -85,7 +85,7 @@ exports.accountActivation = (req, res) => {
           if (err) {
             console.log("SAVE USER IN ACCT ACTIVATION ERROR", err);
             return res.status(401).json({
-              error: "Error saving use in database. Try signup again.",
+              error: "Error saving user in database. Try signup again.",
             });
           }
           return res.json({

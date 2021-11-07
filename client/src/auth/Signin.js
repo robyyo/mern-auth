@@ -79,6 +79,7 @@ const Signin = () => {
     <Layout>
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
+        {authHelpers.isAuth() ? <Redirect to="/" /> : null}
         <h1 className="p-5 text-center">Signin</h1>
         {signinForm()}
       </div>

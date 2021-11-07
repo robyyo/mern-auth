@@ -25,7 +25,7 @@ const Layout = ({ children, match, history }) => {
       </li>
       {!authHelpers.isAuth() && (
         <Fragment>
-          <li>
+          <li className="nav-item">
             <Link
               to="/signup"
               className={
@@ -37,7 +37,7 @@ const Layout = ({ children, match, history }) => {
               Signup
             </Link>
           </li>
-          <li>
+          <li className="nav-item">
             <Link
               to="/signin"
               className={
@@ -51,21 +51,34 @@ const Layout = ({ children, match, history }) => {
           </li>
         </Fragment>
       )}
-      {authHelpers.isAuth() && (
-        <li>
-          <span
-            className="nav-link"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              history.push("/");
-            }}
+      {authHelpers.isAuth() && authHelpers.isAuth().role === "admin" && (
+        <li className="nav-item">
+          <Link
+            className={
+              isActive("/admin") ? `text-dark nav-link` : `text-light nav-link`
+            }
+            to="/admin"
           >
             {authHelpers.isAuth().name}
-          </span>
+          </Link>
+        </li>
+      )}
+      {authHelpers.isAuth() && authHelpers.isAuth().role === "subscriber" && (
+        <li className="nav-item">
+          <Link
+            className={
+              isActive("/private")
+                ? `text-dark nav-link`
+                : `text-light nav-link`
+            }
+            to="/private"
+          >
+            {authHelpers.isAuth().name}
+          </Link>
         </li>
       )}
       {authHelpers.isAuth() && (
-        <li>
+        <li className="nav-item">
           <span
             className="nav-link text-light"
             style={{ cursor: "pointer" }}

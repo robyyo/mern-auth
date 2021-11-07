@@ -55,6 +55,20 @@ const Layout = ({ children, match, history }) => {
         <li>
           <span
             className="nav-link"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            {authHelpers.isAuth().name}
+          </span>
+        </li>
+      )}
+      {authHelpers.isAuth() && (
+        <li>
+          <span
+            className="nav-link text-light"
+            style={{ cursor: "pointer" }}
             onClick={() => {
               authHelpers.signOut(() => {
                 history.push("/");

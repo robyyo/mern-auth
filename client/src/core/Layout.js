@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import authHelpers from "../auth/helpers";
 
-const Layout = ({ children, match }) => {
+const Layout = ({ children, match, history }) => {
   const isActive = (path) => {
     if (match.path === path) {
       return true;
@@ -22,26 +23,48 @@ const Layout = ({ children, match }) => {
           Home
         </Link>
       </li>
-      <li>
-        <Link
-          to="/signup"
-          className={
-            isActive("/signup") ? `text-dark nav-link` : `text-light nav-link`
-          }
-        >
-          Signup
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/signin"
-          className={
-            isActive("/signin") ? `text-dark nav-link` : `text-light nav-link`
-          }
-        >
-          Signin
-        </Link>
-      </li>
+      {!authHelpers.isAuth() && (
+        <Fragment>
+          <li>
+            <Link
+              to="/signup"
+              className={
+                isActive("/signup")
+                  ? `text-dark nav-link`
+                  : `text-light nav-link`
+              }
+            >
+              Signup
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/signin"
+              className={
+                isActive("/signin")
+                  ? `text-dark nav-link`
+                  : `text-light nav-link`
+              }
+            >
+              Signin
+            </Link>
+          </li>
+        </Fragment>
+      )}
+      {authHelpers.isAuth() && (
+        <li>
+          <span
+            className="nav-link"
+            onClick={() => {
+              authHelpers.signOut(() => {
+                history.push("/");
+              });
+            }}
+          >
+            Signout
+          </span>
+        </li>
+      )}
     </ul>
   );
 

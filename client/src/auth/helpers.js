@@ -12,7 +12,7 @@ const authHelpers = {
   // remove from cookie
   removeCookie: (key) => {
     if (window !== "undefined") {
-      cookie.removeCookie(key);
+      cookie.remove(key);
     }
   },
   // get info from cookie
@@ -51,6 +51,11 @@ const authHelpers = {
         }
       }
     }
+  },
+  signOut: (next) => {
+    authHelpers.removeCookie("token");
+    authHelpers.removeLocalStorage("user");
+    next();
   },
 };
 

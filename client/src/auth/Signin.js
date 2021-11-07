@@ -28,7 +28,6 @@ const Signin = () => {
       data: { email, password },
     })
       .then((response) => {
-        console.log("SIGNIN SUCCESS", response);
         //save response (user, token) in (user in localstorage)/ (token in cookie)
         authHelpers.authenticate(response, () => {
           setValues({

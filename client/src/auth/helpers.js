@@ -1,6 +1,6 @@
 import cookie from "js-cookie";
 
-export const authHelpers = {
+const authHelpers = {
   // set in cookie
   setCookie: (key, value) => {
     if (window !== "undefined") {
@@ -53,3 +53,5 @@ export const authHelpers = {
     }
   },
 };
+
+export default authHelpers;

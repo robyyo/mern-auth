@@ -131,5 +131,5 @@ exports.signin = (req, res) => {
 
 exports.requireSignin = expressJWT({
   secret: process.env.JWT_SECRET,
-  algorithms: ["SHA1"],
+  algorithms: ["HS256"],
 });

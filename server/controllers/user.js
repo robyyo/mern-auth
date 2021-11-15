@@ -16,8 +16,9 @@ exports.read = (req, res) => {
 
 exports.update = (req, res) => {
   // console.log("UPDATE USER - req.user", req.user, "UPDATE DATA", req.body);
+  console.log(req.body);
   const { name, password } = req.body;
-  User.findOne({ _id: "618f133e8ee20fad40c1dbd0" }, (err, user) => {
+  User.findOne({ _id: req.user._id }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         error: "User not found",
@@ -32,7 +33,7 @@ exports.update = (req, res) => {
       user.name = name;
     }
     if (password) {
-      if (password < 6) {
+      if (password.length < 6) {
         return res
           .status(400)
           .json({ error: "Password should be min 6 characters long" });
